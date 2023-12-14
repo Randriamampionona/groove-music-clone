@@ -1,11 +1,9 @@
 "use client";
 
-import { CreatePlaylistsContext } from "@/store/context/CreatePlaylistContext";
 import { useCreatePlaylistModal } from "@/store/useCreatePlaylistModal";
 import { FormEvent, useState } from "react";
 
 const CreatePlaylistModal = () => {
-  // const { isOpen, toogle } = CreatePlaylistsContext();
   const { isOpen, toogle } = useCreatePlaylistModal((state) => state);
   const [name, setName] = useState("");
 
