@@ -1,3 +1,8 @@
+const host =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : "https://groove-music-clone.vercel.app";
+
 export const data = [
   {
     id: 458,
@@ -7,7 +12,7 @@ export const data = [
     genre: "Funk",
     duration: "3:55",
     album: "After Hours",
-    src: "http://localhost:3000/assets/audio/audio.mp3",
+    src: `${host}/assets/audio/audio.mp3`,
   },
   {
     id: 2,
@@ -17,7 +22,7 @@ export const data = [
     genre: "Ambient",
     duration: "6:20",
     album: "Whispers of Nature",
-    src: "http://localhost:3000/assets/audio/audio-2.mp3",
+    src: `${host}/assets/audio/audio-2.mp3`,
   },
   {
     id: 3,
@@ -27,7 +32,7 @@ export const data = [
     genre: "Pop",
     duration: "4:10",
     album: "Sunshine Vibes",
-    src: "http://localhost:3000/assets/audio/audio.mp3",
+    src: `${host}/assets/audio/audio.mp3`,
   },
   {
     id: 4,
@@ -37,7 +42,7 @@ export const data = [
     genre: "Electronic",
     duration: "3:45",
     album: "Synthwave Dreams",
-    src: "http://localhost:3000/assets/audio/audio-2.mp3",
+    src: `${host}/assets/audio/audio-2.mp3`,
   },
   {
     id: 5,
@@ -47,7 +52,7 @@ export const data = [
     genre: "Classical",
     duration: "5:30",
     album: "Night Serenades",
-    src: "http://localhost:3000/assets/audio/audio.mp3",
+    src: `${host}/assets/audio/audio.mp3`,
   },
   {
     id: 6,
@@ -57,7 +62,7 @@ export const data = [
     genre: "World",
     duration: "4:55",
     album: "Wanderlust Journeys",
-    src: "http://localhost:3000/assets/audio/audio-2.mp3",
+    src: `${host}/assets/audio/audio-2.mp3`,
   },
   {
     id: 7,
@@ -67,7 +72,7 @@ export const data = [
     genre: "Pop",
     duration: "3:30",
     album: "Metropolitan Melodies",
-    src: "http://localhost:3000/assets/audio/audio.mp3",
+    src: `${host}/assets/audio/audio.mp3`,
   },
   {
     id: 8,
@@ -77,7 +82,7 @@ export const data = [
     genre: "World",
     duration: "4:40",
     album: "Wilderness Echoes",
-    src: "http://localhost:3000/assets/audio/audio-2.mp3",
+    src: `${host}/assets/audio/audio-2.mp3`,
   },
   {
     id: 9,
@@ -87,7 +92,7 @@ export const data = [
     genre: "Ambient",
     duration: "5:15",
     album: "Coastal Harmony",
-    src: "http://localhost:3000/assets/audio/audio.mp3",
+    src: `${host}/assets/audio/audio.mp3`,
   },
   {
     id: 10,
@@ -97,7 +102,7 @@ export const data = [
     genre: "Synthwave",
     duration: "4:30",
     album: "Electric Dreams",
-    src: "http://localhost:3000/assets/audio/audio-2.mp3",
+    src: `${host}/assets/audio/audio-2.mp3`,
   },
   {
     id: 11,
@@ -107,7 +112,7 @@ export const data = [
     genre: "Gothic",
     duration: "4:45",
     album: "Shadows Within",
-    src: "http://localhost:3000/assets/audio/audio.mp3",
+    src: `${host}/assets/audio/audio.mp3`,
   },
   {
     id: 12,
@@ -117,7 +122,7 @@ export const data = [
     genre: "Electronic",
     duration: "3:55",
     album: "Tech Fusion",
-    src: "http://localhost:3000/assets/audio/audio-2.mp3",
+    src: `${host}/assets/audio/audio-2.mp3`,
   },
   {
     id: 13,
@@ -127,7 +132,7 @@ export const data = [
     genre: "Ambient",
     duration: "4:20",
     album: "Enigmatic Dreams",
-    src: "http://localhost:3000/assets/audio/audio.mp3",
+    src: `${host}/assets/audio/audio.mp3`,
   },
   {
     id: 14,
@@ -137,7 +142,7 @@ export const data = [
     genre: "New Age",
     duration: "3:50",
     album: "Cosmic Serenity",
-    src: "http://localhost:3000/assets/audio/audio-2.mp3",
+    src: `${host}/assets/audio/audio-2.mp3`,
   },
   {
     id: 15,
@@ -147,7 +152,7 @@ export const data = [
     genre: "Ambient",
     duration: "5:10",
     album: "Whispering Enchantment",
-    src: "http://localhost:3000/assets/audio/audio.mp3",
+    src: `${host}/assets/audio/audio.mp3`,
   },
   {
     id: 16,
@@ -157,6 +162,6 @@ export const data = [
     genre: "Classical",
     duration: "4:45",
     album: "Symphonic Serenity",
-    src: "http://localhost:3000/assets/audio/audio-2.mp3",
+    src: `${host}/assets/audio/audio-2.mp3`,
   },
 ];
