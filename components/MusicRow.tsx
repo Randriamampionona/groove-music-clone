@@ -15,7 +15,7 @@ const MusicRow = ({ music }: { music: Music }) => {
 
   useEffect(() => {
     setIsChecked(list.filter((n) => n.id == music.id).length > 0);
-  }, [list]);
+  }, [list, music.id]);
 
   return (
     <li

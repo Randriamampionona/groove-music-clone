@@ -13,7 +13,7 @@ const MediaPlayer = ({ musics }: TProps) => {
 
   const onEnded = () => autoPlay();
 
-  useEffect(() => setTracks(musics), [musics]);
+  useEffect(() => setTracks(musics), [musics, setTracks]);
 
   return playableMusic ? (
     <section className="sticky bottom-0 h-auto min-h-[5rem] w-fillAvailable bg-black/70 backdrop-blur-md shadow-audioShadow divide-y divide-zinc-800 text-zinc-100">

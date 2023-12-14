@@ -1,11 +1,9 @@
 "use client";
 
-import { CreatePlaylistsContext } from "@/store/context/CreatePlaylistContext";
 import { useCreatePlaylistModal } from "@/store/useCreatePlaylistModal";
 import { Plus } from "lucide-react";
 
 const AddPlaylistButton = () => {
-  // const { toogle } = CreatePlaylistsContext();
   const { toogle } = useCreatePlaylistModal((state) => state);
 
   return (
