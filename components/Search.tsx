@@ -8,7 +8,7 @@ const Search = () => {
     <div className="w-full px-0 lg:px-4">
       <form
         action=""
-        className="relative hidden lg:flex items-center justify-between bg-zinc-100 rounded-sm"
+        className="relative hidden lg:flex items-center justify-between"
       >
         <Input
           type="text"
