@@ -13,15 +13,19 @@ import {
   ArrowLeftToLine,
   ArrowRightToLine,
 } from "lucide-react";
+
 import H5AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 
-type TProps = { music: Music; onEnded: () => void };
+import Hint from "./Hint";
+import { cn } from "@/lib/utils";
 
-const AudioTag = ({ music, onEnded }: TProps) => {
+type TProps = { music: Music; onEnded: () => void; className?: string };
+
+const AudioTag = ({ music, onEnded, className = "!bg-black" }: TProps) => {
   const { onControl } = useTrackList((state) => state);
 
-  const styles = "text-zinc-100 m-auto pointer-events-none";
+  const styles = "text-zinc-100 m-auto";
 
   const onNext = () => onControl(music.id, "NEXT");
 
@@ -39,60 +43,60 @@ const AudioTag = ({ music, onEnded }: TProps) => {
       onEnded={onEnded}
       onClickNext={onNext}
       onClickPrevious={onPrev}
-      style={{ background: "black" }}
       src={music.src}
       customIcons={{
         play: (
-          <span title="play">
+          <Hint label="play">
             <Play className={styles} />
-          </span>
+          </Hint>
         ),
         forward: (
-          <span title="forward">
+          <Hint label="forward">
             <FastForward className={styles} />
-          </span>
+          </Hint>
         ),
         loop: (
-          <span title="loop">
+          <Hint label="loop">
             <RefreshCcw className={styles} />
-          </span>
+          </Hint>
         ),
         loopOff: (
-          <span title="loopOff">
+          <Hint label="loop Off">
             <RefreshCwOff className={styles} />
-          </span>
+          </Hint>
         ),
         pause: (
-          <span title="pause">
+          <Hint label="pause">
             <Pause className={styles} />
-          </span>
+          </Hint>
         ),
         previous: (
-          <span title="previous">
+          <Hint label="previous">
             <ArrowLeftToLine className={styles} />
-          </span>
+          </Hint>
         ),
         next: (
-          <span title="next">
+          <Hint label="next">
             <ArrowRightToLine className={styles} />
-          </span>
+          </Hint>
         ),
         rewind: (
-          <span title="rewind">
+          <Hint label="rewind">
             <Rewind className={styles} />
-          </span>
+          </Hint>
         ),
         volume: (
-          <span title="volume">
+          <Hint label="volume">
             <Volume2 className={styles} />
-          </span>
+          </Hint>
         ),
         volumeMute: (
-          <span title="volumeMute">
+          <Hint label="volumeMute">
             <VolumeX className={styles} />
-          </span>
+          </Hint>
         ),
       }}
+      className={cn(className, "w-full")}
     />
   );
 };

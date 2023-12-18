@@ -4,9 +4,9 @@ type State = {
   tracks: Music[];
   playableMusic: (Music & { isPlay: boolean }) | null;
   setTracks: (payload: Music[]) => void;
-  play: (id: number) => void;
+  play: (id: string) => void;
   autoPlay: () => void;
-  onControl: (id: number, key: "NEXT" | "PREV") => void;
+  onControl: (id: string, key: "NEXT" | "PREV") => void;
 };
 
 export const useTrackList = create<State>((set) => ({
@@ -24,7 +24,7 @@ export const useTrackList = create<State>((set) => ({
     }));
   },
 
-  play: (id: number) => {
+  play: (id: string) => {
     set((state) => {
       const targetedMusic = state.tracks.find((music) => music.id == id);
 
@@ -72,7 +72,7 @@ export const useTrackList = create<State>((set) => ({
     });
   },
 
-  onControl: (id: number, key: "NEXT" | "PREV") => {
+  onControl: (id: string, key: "NEXT" | "PREV") => {
     if (key.toLocaleUpperCase() === "NEXT") {
       set((state) => {
         const defaultMusic = state.tracks[0];

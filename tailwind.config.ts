@@ -73,6 +73,9 @@ module.exports = {
       width: {
         fillAvailable: "-webkit-fill-available",
       },
+      height: {
+        dscreen: "100dvh",
+      },
       boxShadow: {
         audioShadow: "-7px -10px 30px #0d0d0e",
       },

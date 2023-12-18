@@ -1,31 +1,35 @@
 import { create } from "zustand";
 
 type State = {
-  musics: Music[];
+  selectedMusicIDs: string[];
   cancel: () => void;
-  play: () => void;
-  select: (payload: Music) => void;
+  select: (selectedMusicID: string) => void;
+  selectAll: (groupIDs: string[]) => void;
   deleteMusic: () => void;
   addToPlaylist: () => void;
 };
 
 export const useSelect = create<State>((set) => ({
-  musics: [],
+  selectedMusicIDs: [],
 
   cancel: () => {
     set(() => ({
-      musics: [],
+      selectedMusicIDs: [],
     }));
   },
 
-  play: () => {},
-
-  select: (music: Music) => {
+  select: (selectedMusicID: string) => {
     set((state) => ({
-      musics:
-        state.musics.filter((n) => n.id == music.id).length > 0 // means already there
-          ? state.musics.filter((n) => n.id !== music.id)
-          : [...state.musics, music],
+      selectedMusicIDs:
+        state.selectedMusicIDs.filter((id) => id == selectedMusicID).length > 0 // means already there
+          ? state.selectedMusicIDs.filter((id) => id !== selectedMusicID)
+          : [...state.selectedMusicIDs, selectedMusicID],
+    }));
+  },
+
+  selectAll: (groupIDs: string[]) => {
+    set((_state) => ({
+      selectedMusicIDs: groupIDs,
     }));
   },
 

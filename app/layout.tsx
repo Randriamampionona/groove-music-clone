@@ -1,9 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Sidebar from "@/components/Sidebar";
-import CreatePlaylistModal from "@/components/CreatePlaylistModal";
 import { Toaster } from "@/components/ui/toaster";
-import GroupAction from "@/components/GroupAction";
 
 export const metadata: Metadata = {
   title: "Groove Music Clone",
@@ -18,10 +16,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="relative flex w-full h-screen bg-zinc-950 text-zinc-100">
-        <CreatePlaylistModal />
-        <Sidebar /> {/*width: 18rem */}
-        <main className="relative h-fit ml-72 w-full">
-          <GroupAction />
+        <Sidebar /> {/*width: 4rem na 16rem na 18rem */}
+        <main className="relative h-fit ml-16 lg:ml-64 xl:ml-72 w-full">
           {children}
           <Toaster />
         </main>

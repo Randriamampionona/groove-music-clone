@@ -2,11 +2,11 @@
 
 import { data } from "@/data";
 
-export default async function getMusicById(id: number) {
+export default async function getMusicById(id: string) {
   const requestedData = data.filter((music) => music.id == id)[0];
 
   const nextId =
-    id == data.length
+    id == data.at(-1)?.id
       ? data[0].id
       : data[data.findIndex((n) => n.id == id) + 1]?.id;
 
