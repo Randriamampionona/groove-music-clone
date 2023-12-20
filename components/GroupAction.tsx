@@ -52,7 +52,7 @@ const GroupAction = () => {
   ];
 
   return selectedMusicIDs.length ? (
-    <section className="fixed top-0 flex items-center justify-between w-fillAvailable p-2 lg:p-8 h-12 lg:h-20 bg-black border-b border-zinc-900 z-20">
+    <section className="fixed top-0 flex items-center justify-between w-fillAvailable bg-bgDark p-2 lg:p-4 h-12 lg:h-20 z-20">
       <p className="font-bold">{selectedMusicIDs.length} selected</p>
 
       <div className="hidden items-center justify-end space-x-6 lg:flex">
@@ -62,7 +62,7 @@ const GroupAction = () => {
             onClick={m.action}
             className={cn(
               "flex flex-col items-center justify-center w-20 hover:text-blue-600 cursor-pointer list-none",
-              m.text === "Delete" && "hover:text-red-600"
+              m.text === "Delete" && "hover:text-destructive"
             )}
           >
             <Icon />
@@ -73,7 +73,7 @@ const GroupAction = () => {
 
       <div className="block lg:hidden">
         <DropdownMenu>
-          <DropdownMenuTrigger>
+          <DropdownMenuTrigger className="flex items-center justify-center">
             <MoreVertical />
           </DropdownMenuTrigger>
 
@@ -92,13 +92,13 @@ const GroupAction = () => {
                   className={cn(
                     "mr-2 h-4 w-4",
                     m.text === "Delete" &&
-                      "text-red-600 group-hover:text-red-600"
+                      "text-destructive group-hover:text-destructive"
                   )}
                 />
                 <span
                   className={cn(
                     m.text === "Delete" &&
-                      "text-red-600 group-hover:text-red-600"
+                      "text-destructive group-hover:text-destructive"
                   )}
                 >
                   {m.text}

@@ -13,8 +13,8 @@ type TProps = {
 
 export default function Card({ data, type }: TProps) {
   return (
-    <div className="group flex flex-col items-center justify-start rounded-md w-40 h-auto hover:bg-zinc-900 px-2 py-1 cursor-default active:scale-95 transition-all">
-      <div className="relative flex items-center justify-center w-[9.5rem] h-[9.5rem] border border-zinc-900 rounded-md overflow-hidden">
+    <div className="group flex flex-col items-center justify-start rounded-md w-40 h-auto hover:bg-accent px-2 py-1 cursor-default active:scale-95 transition-all">
+      <div className="relative flex items-center justify-center w-[9.5rem] h-[9.5rem] border-1 rounded-md overflow-hidden">
         <CardThumbnail thumbnail={data.thumbnail} type={type} />
         <CardAction />
       </div>
@@ -35,11 +35,11 @@ const CardThumbnail = ({ thumbnail, type }: Tthumbnail) => {
   const fallback = (t: TdataType) => (
     <div className="flex items-center justify-center w-full h-full bg-black/90">
       {t === "MUSIC" ? (
-        <span className="text-zinc-700">
+        <span className="text-accent">
           <Music4 className="w-12 h-12" />
         </span>
       ) : (
-        <span className="text-zinc-700">
+        <span className="text-accent">
           <AlbumIcon className="w-12 h-12" />
         </span>
       )}
@@ -48,9 +48,11 @@ const CardThumbnail = ({ thumbnail, type }: Tthumbnail) => {
 
   if (typeof thumbnail === "string") {
     cardThumbnail = (
-      <img
+      <Image
         src={thumbnail}
         alt="card-thumbnail"
+        width={152}
+        height={152}
         className="w-full h-full object-cover"
       />
     );
@@ -85,27 +87,16 @@ const CardFooter = ({ data, type }: TCardFooter) => {
 // Card action
 const CardAction = () => {
   return (
-    <div className="absolute inset-0 flex-col hidden w-full h-full group-hover:flex group-hover:backdrop-blur-sm">
+    <div className="absolute inset-0 flex flex-col opacity-0 w-full h-full group-hover:opacity-100 transition-all">
       <div className="flex items-center justify-start p-2">
-        <Input
-          type="checkbox"
-          className="!w-6 !h-6 !accent-blue-600 !bg-zinc-950/70"
-        />
+        <Input type="checkbox" className="!w-6 !h-6 !accent-blue-600" />
       </div>
 
       <div className="flex items-center justify-between w-full p-2 mt-auto">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-full text-zinc-100/50 border border-zinc-100/50 bg-zinc-950/70 w-8 h-8"
-        >
+        <Button size="icon" className="rounded-full w-8 h-8">
           <Play className="pl-1" />
         </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-full text-zinc-100/50 border border-zinc-100/50 bg-zinc-950/70 w-8 h-8"
-        >
+        <Button size="icon" className="rounded-full w-8 h-8">
           <MoreHorizontal />
         </Button>
       </div>

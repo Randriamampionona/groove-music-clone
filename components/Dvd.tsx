@@ -2,10 +2,10 @@ type TProps = {};
 
 const Dvd = ({}: TProps) => {
   return (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-white/10 w-48 h-48 lg:w-60 lg:h-60 rounded-full backdrop-blur-sm z-10">
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center bg-white/10 w-48 h-48 lg:w-60 lg:h-60 rounded-full backdrop-blur-sm z-10 overflow-hidden">
       <div
         className="
-        spin100
+        spin200
         duration-1000
         absolute
         flex
@@ -29,7 +29,7 @@ const Dvd = ({}: TProps) => {
         before:bottom-[8%]
         before:rounded-[40%,60%,49%,44%,/,40%,35%,65%,60%]
         before:blur-md
-        before:bg-[linear-gradient(180deg,transparent,#ffffff0a,#ffffff0f)]
+        before:bg-[linear-gradient(180deg,transparent,#ffffff03,#ffffff0d)]
         
         after:content-['']
         after:absolute
@@ -40,7 +40,7 @@ const Dvd = ({}: TProps) => {
         after:top-[8%]
         after:rounded-[40%,60%,49%,44%,/,40%,35%,65%,60%]
         after:blur-md
-        after:bg-[linear-gradient(0deg,transparent,#ffffff0a,#ffffff0f)]"
+        after:bg-[linear-gradient(0deg,transparent,#ffffff05,#ffffff08)]"
       >
         <div className="absolute flex items-center justify-center bg-white/10 w-12 h-12 lg:w-16 lg:h-16 rounded-full backdrop-blur-sm z-30">
           <div className="w-4 h-4 rounded-full bg-black" />

@@ -1,18 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import AudioTag from "@/components/AudioTag";
 import Dvd from "@/components/Dvd";
-import { Button } from "@/components/ui/button";
 import { useTrackList } from "@/store/useTrackList";
-import {
-  AlertTriangle,
-  Disc3,
-  Heart,
-  ListPlusIcon,
-  Music4,
-} from "lucide-react";
+import { AlertTriangle, Heart, ListPlusIcon } from "lucide-react";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import Blog from "@/components/Blob";
 
 type TProps = {};
 
@@ -34,9 +28,9 @@ const PlayPage = ({}: TProps) => {
 
   return music ? (
     <section className="relative w-full h-dscreen ">
-      <div className="fixed w-full h-full -z-10 bgImage" />
+      <div className="fixed w-full h-full -z-10" />
 
-      <main className="relative flex flex-col h-full backdrop-blur-xl bg-[linear-gradient(0deg,#000,transparent,#000)]">
+      <main className="relative flex flex-col h-full ">
         <header className="w-full h-20 lg:h-12 p-2 lg:p-8">
           <h1 className="font-bold">{`${music?.title} - ${music?.artist}`}</h1>
           <p className="text-muted-foreground">~{music?.genre}</p>
@@ -44,11 +38,11 @@ const PlayPage = ({}: TProps) => {
 
         <div className="relative flex-1 flex items-end justify-center mb-12 px-2 lg:px-8">
           <div className="flex items-center justify-center space-x-4">
-            <div className="flex flex-col items-center justify-start w-20 hover:bg-transparent text-white hover:text-blue-600 cursor-default">
+            <div className="flex flex-col items-center justify-start w-20 hover:bg-transparent hover:text-blue-600 cursor-default">
               <Heart className="" />
               <p className="text-xs text-center">Like</p>
             </div>
-            <div className="flex flex-col items-center justify-start w-20 hover:bg-transparent text-white hover:text-blue-600 cursor-default">
+            <div className="flex flex-col items-center justify-start w-20 hover:bg-transparent hover:text-blue-600 cursor-default">
               <ListPlusIcon className="" />
               <p className="text-xs text-center">Add to</p>
             </div>
@@ -58,6 +52,7 @@ const PlayPage = ({}: TProps) => {
         <AudioTag music={music} onEnded={onEnded} className="!bg-transparent" />
 
         <Dvd />
+        <Blog />
       </main>
     </section>
   ) : (

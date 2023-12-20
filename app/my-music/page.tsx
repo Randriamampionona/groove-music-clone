@@ -15,17 +15,20 @@ const MyMusicPage = async () => {
 
       <PageHeader tile="My music" />
 
-      <div className="p-2 mb-48 xl:mb-36 lg:px-8">
-        <SelectAllButton musics={musicList} />
-        {musicList.map((music) => (
-          <MusicRow key={music.id} music={music} />
-        ))}
-        {musicList.map((music) => (
-          <MobileMusicRow key={music.id} music={music} />
-        ))}
-      </div>
+      <SelectAllButton musics={musicList} />
 
-      <MediaPlayer musics={musicList} />
+      <div className="relative">
+        <div className="p-2 lg:p-4">
+          {musicList.map((music) => (
+            <MusicRow key={music.id} music={music} />
+          ))}
+          {musicList.map((music) => (
+            <MobileMusicRow key={music.id} music={music} />
+          ))}
+        </div>
+
+        <MediaPlayer musics={musicList} />
+      </div>
     </>
   );
 };

@@ -16,21 +16,23 @@ const MediaPlayer = ({ musics }: TProps) => {
   useEffect(() => setTracks(musics), [musics, setTracks]);
 
   return playableMusic ? (
-    <section className="fixed lg:block bottom-0 h-auto min-h-[5rem] w-fillAvailable bg-black/70 backdrop-blur-md shadow-audioShadow divide-y divide-zinc-800 text-zinc-100">
-      <div className="flex flex-wrap md:flex-nowrap w-full items-center justify-between h-full p-4">
-        <div className="w-full md:w-1/3 mb-4 mr-0 md:mr-4 md:mb-0">
-          <h1
-            title={`${playableMusic.title} - ${playableMusic.artist} - (${playableMusic.web})`}
-            className="text-lg cursor-default truncate"
-          >
-            {`${playableMusic.title} - ${playableMusic.artist} - (${playableMusic.web})`}
-          </h1>
-          <p className="font-bold">~{playableMusic.genre}</p>
-        </div>
+    <section className="sticky bottom-0 flex items-center justify-between gap-2 flex-wrap w-fillAvailable bg-black shadow-audioShadow p-2 lg:p-4">
+      <div className="w-1/3 hidden lg:block">
+        <h1
+          title={`${playableMusic.title} - ${playableMusic.artist} - (${playableMusic.web})`}
+          className="cursor-default line-clamp-2"
+        >
+          {`${playableMusic.title} - ${playableMusic.artist} - (${playableMusic.web})`}
+        </h1>
+        <p className="font-bold">~{playableMusic.genre}</p>
+      </div>
 
-        <div className="flex-1 flex-shrink">
-          <AudioTag music={playableMusic} onEnded={onEnded} />
-        </div>
+      <div className="flex-1">
+        <AudioTag
+          music={playableMusic}
+          onEnded={onEnded}
+          className="!bg-transparent"
+        />
       </div>
     </section>
   ) : null;

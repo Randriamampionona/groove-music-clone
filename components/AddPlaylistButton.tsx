@@ -29,16 +29,15 @@ const AddPlaylistButton = () => {
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-          className="flex items-center justify-center w-full h-full rounded-none hover:text-zinc-100 hover:bg-transparent lg:hover:bg-zinc-700"
+          className="flex items-center justify-center w-full h-full rounded-none"
         >
           <Plus />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md border border-blue-600 bg-zinc-100">
+
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="text-zinc-950">
-            Create a new playlist
-          </DialogTitle>
+          <DialogTitle>Create a new playlist</DialogTitle>
           <DialogDescription>
             Add your favorites songs to one place to create a beautiful
             playlist.
@@ -51,23 +50,19 @@ const AddPlaylistButton = () => {
               autoFocus
               value={name}
               placeholder="Name this playlist"
-              className="w-full bg-zinc-100 text-zinc-900 ring-1 ring-zinc-950 rounded-sm"
               onChange={(e) => setName(e.target.value)}
+              className="bg-accent"
             />
           </div>
         </div>
         <DialogFooter className="sm:justify-start">
           <div className="flex items-center justify-end space-x-4 w-full">
             <DialogClose asChild>
-              <Button type="button" variant="ghost" className="text-blue-600">
+              <Button type="button" variant="ghost">
                 Cancel
               </Button>
             </DialogClose>
-            <Button
-              type="button"
-              className="rounded-sm bg-blue-600 text-zinc-100"
-              onClick={createHandler}
-            >
+            <Button variant="primary" type="button" onClick={createHandler}>
               Create playlist
             </Button>
           </div>

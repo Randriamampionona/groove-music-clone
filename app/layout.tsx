@@ -16,12 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/* <body className="relative flex w-full h-screen bg-zinc-950 text-zinc-100"> */}
       <body className="relative flex w-full h-dscreen">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          forcedTheme="dark"
           disableTransitionOnChange
         >
           <Sidebar /> {/*width: 4rem na 16rem na 18rem */}

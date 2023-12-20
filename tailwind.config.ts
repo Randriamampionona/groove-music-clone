@@ -79,6 +79,10 @@ module.exports = {
       boxShadow: {
         audioShadow: "-7px -10px 30px #0d0d0e",
       },
+
+      backgroundColor: {
+        bgDark: "hsl(227 13% 10% / 1)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

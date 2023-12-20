@@ -1,9 +1,11 @@
 "use client";
 
+import useLongPress from "@/hooks/useLongPress";
 import { cn } from "@/lib/utils";
 import { useSelect } from "@/store/useSelect";
 import { useTrackList } from "@/store/useTrackList";
 import { useEffect, useState } from "react";
+import { Input } from "./ui/input";
 
 type TProps = {
   music: Music;
@@ -13,6 +15,12 @@ const MobileMusicRow = ({ music }: TProps) => {
   const { selectedMusicIDs, select } = useSelect((state) => state);
   const { play, playableMusic } = useTrackList((state) => state);
 
+  const { bind } = useLongPress({
+    onLongPress: () => {
+      select(music.id);
+    },
+  });
+
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
@@ -21,21 +29,22 @@ const MobileMusicRow = ({ music }: TProps) => {
 
   return (
     <div
+      {...bind}
       onClick={() => play(music.id)}
       onDoubleClick={(e) => {
         select(music.id);
         e.stopPropagation();
       }}
       className={cn(
-        "flex items-center justify-between md:hidden p-2 space-x-4 select-none cursor-default hover:bg-zinc-700/70",
-        playableMusic?.id === music.id && "bg-zinc-900"
+        "flex items-center justify-between md:hidden p-2 space-x-4 select-none cursor-default hover:bg-accent/50",
+        playableMusic?.id === music.id && "bg-accent/50"
       )}
     >
       <div className="flex-1">
         <div className="flex items-center justify-between">
           <h1
             className={cn(
-              "flex-1 w-2 truncate",
+              "flex-1 line-clamp-1",
               playableMusic?.id === music.id && "font-bold"
             )}
           >
@@ -49,11 +58,14 @@ const MobileMusicRow = ({ music }: TProps) => {
       </div>
 
       {isChecked && (
-        <input
-          className={cn("border-zinc-100 w-5 h-5 accent-blue-600 outline-none")}
+        <Input
           type="checkbox"
           checked={isChecked}
           onChange={() => select(music.id)}
+          className={cn(
+            "w-5 h-5 opacity-0 group-hover:opacity-100 accent-blue-600 mr-2",
+            isChecked && "opacity-100"
+          )}
         />
       )}
     </div>

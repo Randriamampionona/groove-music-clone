@@ -11,15 +11,16 @@ const SelectAllButton = ({ musics }: TProps) => {
   const { selectedMusicIDs, selectAll, cancel } = useSelect((state) => state);
 
   return selectedMusicIDs.length > 0 ? (
-    <div className="sticky top-12 lg:top-20 flex items-center justify-start py-4 space-x-4 bg-zinc-950 w-full">
+    <div className="sticky top-12 lg:top-20 flex items-center justify-start space-x-4 w-full p-2 lg:p-4 bg-bgDark z-20">
       {selectedMusicIDs.length === musics.length ? (
-        <Button variant="gostOutline" onClick={cancel}>
+        <Button variant="gostOutline" onClick={cancel} className="uppercase">
           Unselect All
         </Button>
       ) : (
         <Button
           variant="gostOutline"
           onClick={() => selectAll(musics.map((m) => m.id))}
+          className="uppercase"
         >
           Select All
         </Button>
@@ -28,7 +29,7 @@ const SelectAllButton = ({ musics }: TProps) => {
       <Button
         variant="destructive"
         onClick={() => selectAll(musics.map((m) => m.id))}
-        className="rounded-none uppercase"
+        className="uppercase"
       >
         Delete ({selectedMusicIDs.length})
       </Button>

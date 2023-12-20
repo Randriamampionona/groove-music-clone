@@ -7,11 +7,11 @@ import { useSelect } from "@/store/useSelect";
 import { cn } from "@/lib/utils";
 import { useTrackList } from "@/store/useTrackList";
 import Hint from "./Hint";
+import { Input } from "./ui/input";
 
 const MusicRow = ({ music }: { music: Music }) => {
   const { selectedMusicIDs, select } = useSelect((state) => state);
   const { play, playableMusic } = useTrackList((state) => state);
-
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
@@ -20,27 +20,25 @@ const MusicRow = ({ music }: { music: Music }) => {
 
   return (
     <li
-      className={cn(
-        "group hidden md:grid grid-cols-[auto,1fr,1fr,1fr,1fr,auto] items-center list-none px-4 h-12 space-x-4 odd:bg-zinc-900 even:bg-zinc-950 hover:bg-zinc-700/70",
-        selectedMusicIDs.length > 0 && "first:mt-12 lg:first:mt-0",
-        playableMusic?.id === music.id && "text-blue-600 bg-zinc-700/70"
-      )}
       onDoubleClick={() => select(music.id)}
+      className={cn(
+        "group hidden md:flex items-center list-none px-4 h-12 odd:bg-accent/50 rounded",
+        selectedMusicIDs.length > 0 && "first:mt-12 lg:first:mt-0",
+        playableMusic?.id === music.id && "text-blue-600"
+      )}
     >
-      <input
-        className={cn(
-          "border-zinc-100 w-5 h-5 accent-blue-600 outline-none opacity-0 group-hover:opacity-100 ",
-          isChecked && "opacity-100"
-        )}
+      <Input
         type="checkbox"
         checked={isChecked}
         onChange={() => select(music.id)}
+        className={cn(
+          "w-5 h-5 opacity-0 group-hover:opacity-100 accent-blue-600 mr-2",
+          isChecked && "opacity-100"
+        )}
       />
-      <div className="flex items-center h-full">
-        <h1
-          title={music.title}
-          className="flex-1 flex-shrink w-2 truncate cursor-default"
-        >
+
+      <div className="flex-1 flex items-center h-full px-2">
+        <h1 title={music.title} className="flex-1 cursor-default line-clamp-1">
           {music.title}
         </h1>
         {!isChecked && (
@@ -48,8 +46,9 @@ const MusicRow = ({ music }: { music: Music }) => {
             {playableMusic?.id !== music.id && (
               <Hint label="Play">
                 <Button
+                  asChild
                   variant="ghost"
-                  className="flex items-center justify-center h-full w-12 hover:bg-zinc-700 rounded-none"
+                  className="flex items-center justify-center h-full w-12 rounded-none"
                   onClick={() => play(music.id)}
                 >
                   <Play className="text-zinc-100" />
@@ -59,8 +58,9 @@ const MusicRow = ({ music }: { music: Music }) => {
 
             <Hint label="Add to playlist">
               <Button
+                asChild
                 variant="ghost"
-                className="h-full w-12 hover:bg-zinc-700 text-2xl rounded-none"
+                className="h-full w-12 text-2xl rounded-none"
               >
                 <Plus className="text-zinc-100" />
               </Button>
@@ -68,10 +68,11 @@ const MusicRow = ({ music }: { music: Music }) => {
           </div>
         )}
       </div>
-      <p className="w-full truncate">{music.artist}</p>
-      <p className="w-full truncate">{music.genre}</p>
-      <p className="w-full truncate">{music.web}</p>
-      <p className="w-full truncate">{music.duration}</p>
+
+      <p className="flex-1 px-2 line-clamp-1">{music.artist}</p>
+      <p className="flex-1 px-2 line-clamp-1">{music.genre}</p>
+      <p className="flex-1 px-2 line-clamp-1">{music.web}</p>
+      <p className="w-auto line-clamp-1">{music.duration}</p>
     </li>
   );
 };
