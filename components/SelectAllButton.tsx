@@ -5,13 +5,14 @@ import { Button } from "./ui/button";
 
 type TProps = {
   musics: Music[];
+  isShown?: boolean;
 };
 
-const SelectAllButton = ({ musics }: TProps) => {
+const SelectAllButton = ({ musics, isShown = false }: TProps) => {
   const { selectedMusicIDs, selectAll, cancel } = useSelect((state) => state);
 
-  return selectedMusicIDs.length > 0 ? (
-    <div className="sticky top-12 lg:top-20 flex items-center justify-start space-x-4 w-full p-2 lg:p-4 bg-bgDark z-20">
+  return selectedMusicIDs.length > 0 && !!isShown ? (
+    <div className="flex items-center justify-start space-x-4 w-full">
       {selectedMusicIDs.length === musics.length ? (
         <Button variant="gostOutline" onClick={cancel} className="uppercase">
           Unselect All

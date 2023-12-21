@@ -4,18 +4,15 @@ import MediaPlayer from "@/components/MediaPlayer";
 import MobileMusicRow from "@/components/MobileMusicRow";
 import MusicRow from "@/components/MusicRow";
 import PageHeader from "@/components/PageHeader";
-import SelectAllButton from "@/components/SelectAllButton";
 
 const MyMusicPage = async () => {
   const musicList = await getMusicList();
 
   return (
     <>
-      <GroupAction />
+      <GroupAction musicList={musicList} />
 
       <PageHeader tile="My music" />
-
-      <SelectAllButton musics={musicList} />
 
       <div className="relative">
         <div className="p-2 lg:p-4">
