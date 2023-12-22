@@ -1,15 +1,14 @@
 import Link from "next/link";
-import Search from "./Search";
-import NavLinks from "./NavLinks";
 
 import {
   Music4,
   AudioWaveformIcon,
   ListMusic,
-  FileMusicIcon,
   ListChecks,
   AppWindowIcon,
 } from "lucide-react";
+import Search from "./Search";
+import NavLinks from "./NavLinks";
 
 const navLinks = [
   {
@@ -34,12 +33,6 @@ const navLinks = [
     text: "Recent plays",
     slug: "/recent-plays",
     Icon: <ListMusic />,
-    action: false,
-  },
-  {
-    text: "Now playing",
-    slug: "/now-playing",
-    Icon: <FileMusicIcon />,
     action: false,
   },
   {

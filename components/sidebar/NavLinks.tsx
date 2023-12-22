@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import AddPlaylistDialog from "./AddPlaylistDialog";
+import AddPlaylistDialog from "../AddPlaylistDialog";
 import { usePathname } from "next/navigation";
 import { Settings2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Hint from "./Hint";
+import Hint from "../Hint";
 import { useCallback } from "react";
 
 type TProps = {

@@ -44,7 +44,7 @@ const GroupAction = ({ musicList }: TGroupAction) => {
     selectAll(musicList.map((m) => m.id));
   };
 
-  const menu = [
+  const groupMenu = [
     {
       id: "cancel",
       text: "Cancel",
@@ -91,7 +91,7 @@ const GroupAction = ({ musicList }: TGroupAction) => {
         </div>
 
         <div className="hidden items-center justify-end space-x-4 lg:flex">
-          {menu.map(({ Icon, ...m }) => {
+          {groupMenu.map(({ Icon, ...m }) => {
             if (m.id === "add") {
               return (
                 <AddPlaylistDialog
@@ -144,7 +144,7 @@ const GroupAction = ({ musicList }: TGroupAction) => {
                 <p className="font-bold">{selectedMusicIDs.length} selected</p>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              {menu.map(({ Icon, ...m }) => (
+              {groupMenu.map(({ Icon, ...m }) => (
                 <DropdownMenuItem
                   key={m.text}
                   className={cn("group")}

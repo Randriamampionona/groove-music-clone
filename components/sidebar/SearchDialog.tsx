@@ -10,10 +10,10 @@ import {
   DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
-import Hint from "./Hint";
+import Hint from "@/components/Hint";
 
 type TProps = {
   dialogTrigger: JSX.Element;

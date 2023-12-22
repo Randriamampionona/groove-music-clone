@@ -1,8 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Sidebar from "@/components/Sidebar";
 import { Toaster } from "@/components/ui/toaster";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
+import Sidebar from "@/components/sidebar";
 
 export const metadata: Metadata = {
   title: "Groove Music Clone",

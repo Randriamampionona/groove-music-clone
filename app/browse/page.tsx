@@ -1,6 +1,7 @@
 import PageHeader from "@/components/PageHeader";
 import getMusicList from "@/action/getMusicList";
 import Card from "@/components/Card";
+import GroupAction from "@/components/GroupAction";
 
 type TProps = {};
 
@@ -9,6 +10,8 @@ const BrowsePage = async ({}: TProps) => {
 
   return (
     <>
+      <GroupAction musicList={data} />
+
       <PageHeader tile="Find all the best here" />
 
       <div className="justify-center flex flex-wrap sm:justify-start gap-y-6 w-full p-2 lg:p-8">
