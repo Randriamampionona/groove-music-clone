@@ -38,11 +38,11 @@ const PlayPage = ({}: TProps) => {
 
         <div className="relative flex-1 flex items-end justify-center mb-12 px-2 lg:px-8">
           <div className="flex items-center justify-center space-x-4">
-            <div className="flex flex-col items-center justify-start w-20 hover:bg-transparent hover:text-blue-600 cursor-default">
+            <div className="flex flex-col items-center justify-start w-20 hover:bg-transparent hover:text-primary_color cursor-default">
               <Heart className="" />
               <p className="text-xs text-center">Like</p>
             </div>
-            <div className="flex flex-col items-center justify-start w-20 hover:bg-transparent hover:text-blue-600 cursor-default">
+            <div className="flex flex-col items-center justify-start w-20 hover:bg-transparent hover:text-primary_color cursor-default">
               <ListPlusIcon className="" />
               <p className="text-xs text-center">Add to</p>
             </div>

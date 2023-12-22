@@ -41,7 +41,8 @@ const NavLinks = ({ navLinks }: TProps) => {
               className={cn(
                 "flex flex-col lg:flex-row items-center list-none h-14 lg:h-12",
                 link.slug === "/playlists" && "border-t",
-                isActive(link.slug) && "border-l-4 border-l-blue-600 bg-accent"
+                isActive(link.slug) &&
+                  "border-l-4 border-l-primary_color bg-accent"
               )}
             >
               <Link
@@ -71,7 +72,8 @@ const NavLinks = ({ navLinks }: TProps) => {
         <li
           className={cn(
             "flex items-center list-none h-12 border-t px-4 hover:bg-accent",
-            isActive("/settings") && "border-l-4 border-l-blue-600 bg-accent"
+            isActive("/settings") &&
+              "border-l-4 border-l-primary_color bg-accent"
           )}
         >
           <Link

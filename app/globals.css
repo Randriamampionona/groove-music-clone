@@ -49,6 +49,8 @@ body,
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    --primary-color: 19, 100%, 50%; /*#2563eb;*/
   }
 
   .dark {
@@ -79,6 +81,8 @@ body,
     --border: 226.7 12.7% 17.5%;
     --input: 226.7 12.7% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    --primary-color: 19, 100%, 50%; /*#2563eb;*/
   }
 
   * {
@@ -124,7 +128,7 @@ button[aria-label="Skip"] {
 
 button[aria-label="Play"],
 button[aria-label="Pause"] {
-  background: rgb(37 99 235 /1) !important;
+  background: hsl(var(--primary-color)) !important;
   width: 3rem !important;
   height: 3rem !important;
 }

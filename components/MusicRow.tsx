@@ -25,7 +25,7 @@ const MusicRow = ({ music }: { music: Music }) => {
       className={cn(
         "group hidden md:flex items-center list-none px-4 h-12 odd:bg-accent/50 rounded",
         selectedMusicIDs.length > 0 && "first:mt-12 lg:first:mt-0",
-        playableMusic?.id === music.id && "text-blue-600"
+        playableMusic?.id === music.id && "text-primary_color"
       )}
     >
       <Input
@@ -33,7 +33,7 @@ const MusicRow = ({ music }: { music: Music }) => {
         checked={isChecked}
         onChange={() => select(music.id)}
         className={cn(
-          "w-5 h-5 opacity-0 group-hover:opacity-100 accent-blue-600 mr-2",
+          "w-5 h-5 opacity-0 group-hover:opacity-100 accent-primary_color mr-2",
           isChecked && "opacity-100"
         )}
       />

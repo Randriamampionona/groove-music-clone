@@ -137,7 +137,7 @@ export const CustomVolumeControls = ({
         <div className="flex-1">
           <Input
             type="range"
-            className="accent-blue-600"
+            className="accent-primary_color"
             value={volume * 100}
             onChange={(e) => changeHandler(e)}
           />

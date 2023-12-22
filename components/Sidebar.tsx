@@ -54,11 +54,11 @@ const Sidebar = () => {
   return (
     <aside className="fixed top-0 flex flex-col space-y-0 border-r lg:space-y-4 w-16 lg:w-64 xl:w-72 h-full bg-card z-20">
       <Link href={"/"} as={"/"} className="w-auto">
-        <h1 className="hidden lg:block text-2xl font-semibold my-3 px-4 w-full first-letter:text-blue-600">
+        <h1 className="hidden lg:block text-2xl font-semibold my-3 px-4 w-full first-letter:text-primary_color">
           Groove Music
         </h1>
         <h1
-          className="flex items-center justify-center font-bold text-zinc-100 text-center text-2xl p-2 m-2 rounded-sm bg-blue-600 lg:hidden"
+          className="flex items-center justify-center font-bold text-zinc-100 text-center text-2xl p-2 m-2 rounded-sm bg-primary_color lg:hidden"
           style={{ fontFamily: "cursive" }}
         >
           G

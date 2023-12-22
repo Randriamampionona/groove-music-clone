@@ -25,7 +25,7 @@ const CardAction = ({ data, type }: TCardAction) => {
       <div className="flex items-center justify-start p-2">
         <Input
           type="checkbox"
-          className="!w-5 !h-5 !accent-blue-600"
+          className="!w-5 !h-5 !accent-primary_color"
           checked={selectedMusicIDs.findIndex((id) => id == data.id) != -1}
           onChange={(_e) => select(data.id)}
         />

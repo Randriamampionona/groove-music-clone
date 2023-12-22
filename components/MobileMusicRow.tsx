@@ -63,7 +63,7 @@ const MobileMusicRow = ({ music }: TProps) => {
           checked={isChecked}
           onChange={() => select(music.id)}
           className={cn(
-            "w-5 h-5 opacity-0 group-hover:opacity-100 accent-blue-600 mr-2",
+            "w-5 h-5 opacity-0 group-hover:opacity-100 accent-primary_color mr-2",
             isChecked && "opacity-100"
           )}
         />

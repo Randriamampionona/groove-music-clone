@@ -78,7 +78,7 @@ const GroupAction = ({ musicList }: TGroupAction) => {
           <Input
             type="checkbox"
             checked={selectedMusicIDs.length === musicList.length}
-            className="!w-5 !h-5 !accent-blue-600"
+            className="!w-5 !h-5 !accent-primary_color"
             onChange={() => {
               selectedMusicIDs.length === musicList.length
                 ? unSelectAll()
