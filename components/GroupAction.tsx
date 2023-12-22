@@ -18,6 +18,7 @@ import { useTrackList } from "@/store/useTrackList";
 import { getMusicBySelectedIDs } from "@/action/getMusicBySelectedIDs";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import AddPlaylistDialog from "./AddPlaylistDialog";
 
 type TGroupAction = {
   musicList: Music[];
@@ -45,21 +46,25 @@ const GroupAction = ({ musicList }: TGroupAction) => {
 
   const menu = [
     {
+      id: "cancel",
       text: "Cancel",
       Icon: X,
       action: unSelectAll,
     },
     {
+      id: "play",
       text: "Play",
       Icon: Play,
       action: playSelectedMusic,
     },
     {
+      id: "add",
       text: "Add to playlist",
       Icon: ListChecks,
       action: () => {},
     },
     {
+      id: "delete",
       text: "Delete",
       Icon: Trash2,
       action: () => {},
@@ -86,20 +91,44 @@ const GroupAction = ({ musicList }: TGroupAction) => {
         </div>
 
         <div className="hidden items-center justify-end space-x-4 lg:flex">
-          {menu.map(({ Icon, ...m }) => (
-            <Button
-              variant="ghost"
-              key={m.text}
-              onClick={m.action}
-              className={cn(
-                "flex items-center justify-center cursor-pointer list-none bg-accent space-x-2",
-                m.text === "Delete" && "hover:text-destructive"
-              )}
-            >
-              <Icon size={18} />
-              <span>{m.text}</span>
-            </Button>
-          ))}
+          {menu.map(({ Icon, ...m }) => {
+            if (m.id === "add") {
+              return (
+                <AddPlaylistDialog
+                  dialogTrigger={
+                    <Button
+                      variant="ghost"
+                      key={m.id}
+                      onClick={m.action}
+                      className={cn(
+                        "flex items-center justify-center cursor-pointer list-none bg-accent space-x-2"
+                      )}
+                    >
+                      <Icon size={18} />
+                      <span>{m.text}</span>
+                    </Button>
+                  }
+                  dialogType="exist"
+                  dialogData={selectedMusicIDs}
+                />
+              );
+            } else {
+              return (
+                <Button
+                  variant="ghost"
+                  key={m.id}
+                  onClick={m.action}
+                  className={cn(
+                    "flex items-center justify-center cursor-pointer list-none bg-accent space-x-2",
+                    m.id === "delete" && "hover:text-destructive"
+                  )}
+                >
+                  <Icon size={18} />
+                  <span>{m.text}</span>
+                </Button>
+              );
+            }
+          })}
         </div>
 
         <div className="block lg:hidden">

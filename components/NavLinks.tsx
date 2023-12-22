@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import AddPlaylistButton from "./AddPlaylistButton";
+import AddPlaylistDialog from "./AddPlaylistDialog";
 import { usePathname } from "next/navigation";
-import { LucideIcon, Settings2 } from "lucide-react";
+import { Settings2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Hint from "./Hint";
 import { useCallback } from "react";
@@ -54,21 +54,17 @@ const NavLinks = ({ navLinks }: TProps) => {
               </Link>
 
               {link.action && (
-                <Hint label="Create playlist" side="right">
-                  <div className="hidden w-12 h-12 lg:block">
-                    <AddPlaylistButton />
-                  </div>
-                </Hint>
+                <div className="hidden w-12 h-12 lg:block">
+                  <AddPlaylistDialog hintLabel="Create playlist" />
+                </div>
               )}
             </li>
           </Hint>
         ))}
 
-        <Hint label="Create playlist" side="right">
-          <li className="lg:hidden flex items-center list-none h-12">
-            <AddPlaylistButton />
-          </li>
-        </Hint>
+        <li className="lg:hidden flex items-center list-none h-12">
+          <AddPlaylistDialog hintLabel="Create playlist" />
+        </li>
       </div>
 
       <Hint label="Settings" side="right" className="block lg:hidden">

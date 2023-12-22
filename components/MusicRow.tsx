@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { useTrackList } from "@/store/useTrackList";
 import Hint from "./Hint";
 import { Input } from "./ui/input";
+import AddPlaylistDialog from "./AddPlaylistDialog";
 
 const MusicRow = ({ music }: { music: Music }) => {
   const { selectedMusicIDs, select } = useSelect((state) => state);
@@ -56,15 +57,21 @@ const MusicRow = ({ music }: { music: Music }) => {
               </Hint>
             )}
 
-            <Hint label="Add to playlist">
-              <Button
-                asChild
-                variant="ghost"
-                className="h-full w-12 text-2xl rounded-none"
-              >
-                <Plus className="text-zinc-100" />
-              </Button>
-            </Hint>
+            <AddPlaylistDialog
+              dialogTrigger={
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="h-full w-12 text-2xl rounded-none"
+                >
+                  <Plus className="text-zinc-100" />
+                </Button>
+              }
+              hintLabel="Add to playlist"
+              hintPosition="top"
+              dialogType="exist"
+              dialogData={[music.id]}
+            />
           </div>
         )}
       </div>
