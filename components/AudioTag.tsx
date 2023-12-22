@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-type TProps = { music: Music; onEnded: () => void; className?: string };
+type TProps = { music: Music; onEnded?: () => void; className?: string };
 
 const AudioTag = ({ music, onEnded, className = "" }: TProps) => {
   const { onControl } = useTrackList((state) => state);

@@ -28,8 +28,6 @@ const PlayPage = ({}: TProps) => {
 
   return music ? (
     <section className="relative w-full h-dscreen ">
-      <div className="fixed w-full h-full -z-10" />
-
       <main className="relative flex flex-col h-full ">
         <header className="w-full h-20 lg:h-12 p-2 lg:p-8">
           <h1 className="font-bold">{`${music?.title} - ${music?.artist}`}</h1>

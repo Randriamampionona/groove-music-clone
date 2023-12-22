@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { MoreHorizontal, Play } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -32,9 +33,11 @@ const CardAction = ({ data, type }: TCardAction) => {
       </div>
 
       <div className="flex items-center justify-between w-full p-2 mt-auto opacity-0 group-hover:opacity-100">
-        <Button size="icon" className="rounded-full w-8 h-8">
-          <Play className="pl-1" />
-        </Button>
+        <Link href={`/play/${data.id}`}>
+          <Button size="icon" className="rounded-full w-8 h-8">
+            <Play className="pl-1" />
+          </Button>
+        </Link>
         <Button size="icon" className="rounded-full w-8 h-8">
           <MoreHorizontal />
         </Button>
