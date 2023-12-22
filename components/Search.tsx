@@ -1,7 +1,9 @@
+"use client";
+
 import { SearchIcon } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import Hint from "./Hint";
+import SearchDialog from "./SearchDialog";
 
 const Search = () => {
   return (
@@ -16,14 +18,17 @@ const Search = () => {
           className="absolute right-2 text-muted-foreground pointer-events-none"
         />
       </form>
-      <Hint label="Search" side="right">
-        <Button
-          variant="ghost"
-          className="flex items-center justify-center rounded-none w-full h-14 lg:hidden"
-        >
-          <SearchIcon />
-        </Button>
-      </Hint>
+
+      <SearchDialog
+        dialogTrigger={
+          <Button
+            variant="ghost"
+            className="flex items-center justify-center rounded-none w-full h-14 lg:hidden"
+          >
+            <SearchIcon />
+          </Button>
+        }
+      />
     </div>
   );
 };
