@@ -24,7 +24,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Sidebar /> {/*width: 4rem na 16rem na 18rem */}
-          <main className="relative h-fit ml-16 lg:ml-64 xl:ml-72 w-full">
+          <main className="relative ml-16 lg:ml-64 xl:ml-72 w-full h-full">
             {children}
             <Toaster />
           </main>

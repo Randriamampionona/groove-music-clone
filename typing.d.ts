@@ -13,6 +13,7 @@ type Music = {
 type Playlist = {
   id: string;
   title: string;
-  elementCount: number;
   thumbnail: string | null;
+  elementCount: number;
+  element: string[];
 };

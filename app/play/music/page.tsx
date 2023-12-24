@@ -1,37 +1,39 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import AudioTag from "@/components/AudioTag";
 import Dvd from "@/components/Dvd";
-import { useTrackList } from "@/store/useTrackList";
 import { AlertTriangle, Heart, ListPlusIcon } from "lucide-react";
-import { redirect } from "next/navigation";
 import Blog from "@/components/Blob";
+import { getMusicByIDs } from "@/action/getMusicByIDs";
+import { notFound } from "next/navigation";
 
-type TProps = {};
+type TProps = {
+  searchParams: {
+    tracks?: string;
+    index?: string;
+  };
+};
 
-const PlayPage = ({}: TProps) => {
-  const { playableMusic, autoPlay } = useTrackList((state) => state);
-  const [music, setMusic] = useState<Music | null>(null);
+const PlayPage = async ({ searchParams: { tracks, index = "0" } }: TProps) => {
+  const IDs = tracks?.split(
+    process.env.NEXT_PUBLIC_QUERY_STRING_SEPARATOR! as string
+  );
 
-  const onEnded = () => autoPlay();
+  if (!IDs?.length) return notFound();
 
-  useEffect(() => {
-    if (playableMusic?.id) {
-      const { isPlay, ...rest } = playableMusic;
-      const modifiedMusic = rest;
-      setMusic(modifiedMusic);
-    } else {
-      redirect("/my-music");
-    }
-  }, [playableMusic]);
+  if (IDs.length && Number(index) > IDs.length) return notFound();
 
-  return music ? (
+  const musics = await getMusicByIDs(IDs);
+
+  const playableMusic = !!musics ? musics[Number(index)] : null;
+
+  const nextUrlIndex = Number(index) + 1;
+  const prevUrlIndex = Number(index) - 1;
+
+  return !!playableMusic ? (
     <section className="relative w-full h-dscreen ">
       <main className="relative flex flex-col h-full ">
         <header className="w-full h-20 lg:h-12 p-2 lg:p-8">
-          <h1 className="font-bold">{`${music?.title} - ${music?.artist}`}</h1>
-          <p className="text-muted-foreground">~{music?.genre}</p>
+          <h1 className="font-bold">{`${playableMusic.title} - ${playableMusic.artist}`}</h1>
+          <p className="text-muted-foreground">~{playableMusic.genre}</p>
         </header>
 
         <div className="relative flex-1 flex items-end justify-center mb-12 px-2 lg:px-8">
@@ -47,7 +49,17 @@ const PlayPage = ({}: TProps) => {
           </div>
         </div>
 
-        <AudioTag music={music} onEnded={onEnded} className="!bg-transparent" />
+        <AudioTag
+          music={playableMusic}
+          queries={{
+            next: [{ tracks }, { index: nextUrlIndex }],
+            prev: [{ tracks }, { index: prevUrlIndex }],
+          }}
+          trackLength={IDs.length}
+          nextUrlIndex={nextUrlIndex}
+          prevUrlIndex={prevUrlIndex}
+          className="!bg-transparent"
+        />
 
         <Dvd />
         <Blog />
@@ -57,7 +69,7 @@ const PlayPage = ({}: TProps) => {
     <section className="flex items-center justify-center w-full h-dscreen">
       <div className="flex flex-col items-center justify-center space-y-1 text-center px-2">
         <AlertTriangle size={40} className="text-yellow-600" />
-        <h1>Empty track list</h1>
+        <h1>Track list not found</h1>
       </div>
     </section>
   );

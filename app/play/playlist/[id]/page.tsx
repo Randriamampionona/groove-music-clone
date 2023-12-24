@@ -1,0 +1,86 @@
+import AudioTag from "@/components/AudioTag";
+import Dvd from "@/components/Dvd";
+import { AlertTriangle, Heart, ListPlusIcon } from "lucide-react";
+import Blog from "@/components/Blob";
+import { getMusicByIDs } from "@/action/getMusicByIDs";
+import getPlaylistId from "@/action/getPlaylistbyId";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+type TProps = {
+  params: {
+    id?: string;
+  };
+  searchParams: {
+    index?: string;
+  };
+};
+
+const PlayPage = async ({
+  params: { id: playlistID },
+  searchParams: { index = "0" },
+}: TProps) => {
+  const playlist = await getPlaylistId(playlistID || "");
+
+  if (!playlist) return notFound();
+
+  const musics = await getMusicByIDs(playlist?.element || [""]);
+
+  if (musics?.length && Number(index) > musics?.length) return notFound();
+
+  const playableMusic = !!musics ? musics[Number(index)] : null;
+
+  const nextUrlIndex = Number(index) + 1;
+  const prevUrlIndex = Number(index) - 1;
+
+  return !!playableMusic ? (
+    <section className="relative w-full h-dscreen ">
+      <main className="relative flex flex-col h-full ">
+        <header className="w-full h-20 lg:h-12 p-2 lg:p-8">
+          <Link href={`/playlist/${playlistID}`} className="italic underline">
+            {playlist?.title}
+          </Link>
+          <h1 className="font-bold">{`${playableMusic.title} - ${playableMusic.artist}`}</h1>
+          <p className="text-muted-foreground">~{playableMusic.genre}</p>
+        </header>
+
+        <div className="relative flex-1 flex items-end justify-center mb-12 px-2 lg:px-8">
+          <div className="flex items-center justify-center space-x-4">
+            <div className="flex flex-col items-center justify-start w-20 hover:bg-transparent hover:text-primary_color cursor-default">
+              <Heart className="" />
+              <p className="text-xs text-center">Like</p>
+            </div>
+            <div className="flex flex-col items-center justify-start w-20 hover:bg-transparent hover:text-primary_color cursor-default">
+              <ListPlusIcon className="" />
+              <p className="text-xs text-center">Add to</p>
+            </div>
+          </div>
+        </div>
+
+        <AudioTag
+          music={playableMusic}
+          queries={{
+            next: [{ index: nextUrlIndex }],
+            prev: [{ index: prevUrlIndex }],
+          }}
+          trackLength={musics?.length || 0}
+          nextUrlIndex={nextUrlIndex}
+          prevUrlIndex={prevUrlIndex}
+          className="!bg-transparent"
+        />
+
+        <Dvd />
+        <Blog />
+      </main>
+    </section>
+  ) : (
+    <section className="flex items-center justify-center w-full h-dscreen">
+      <div className="flex flex-col items-center justify-center space-y-1 text-center px-2">
+        <AlertTriangle size={40} className="text-yellow-600" />
+        <h1>Empty playlist</h1>
+      </div>
+    </section>
+  );
+};
+
+export default PlayPage;

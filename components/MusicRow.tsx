@@ -5,33 +5,46 @@ import { Play, Plus } from "lucide-react";
 import { Button } from "./ui/button";
 import { useSelect } from "@/store/useSelect";
 import { cn } from "@/lib/utils";
-import { useTrackList } from "@/store/useTrackList";
 import Hint from "./Hint";
 import { Input } from "./ui/input";
 import AddPlaylistDialog from "./AddPlaylistDialog";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-const MusicRow = ({ music }: { music: Music }) => {
-  const { selectedMusicIDs, select } = useSelect((state) => state);
-  const { play, playableMusic } = useTrackList((state) => state);
+type TMusicRow = {
+  music: Music & { index?: number };
+};
+
+const MusicRow = ({ music }: TMusicRow) => {
+  const { getColection, select } = useSelect((state) => state);
   const [isChecked, setIsChecked] = useState(false);
+  const { get } = useSearchParams();
+  const { push } = useRouter();
+  const pathname = usePathname();
+
+  const colectionIDs = getColection(pathname).colectionIDs;
+
+  const isPlaying = Number(get("index")) === music.index;
+
+  const clickHandler = () => {
+    push(`${pathname}?index=${music.index}`);
+  };
 
   useEffect(() => {
-    setIsChecked(selectedMusicIDs.filter((id) => id == music.id).length > 0);
-  }, [selectedMusicIDs, music.id]);
+    setIsChecked(colectionIDs.filter((id) => id == music.id).length > 0);
+  }, [colectionIDs, music.id]);
 
   return (
     <li
-      onDoubleClick={() => select(music.id)}
+      onDoubleClick={() => select(music.id, pathname)}
       className={cn(
         "group hidden md:flex items-center list-none px-4 h-12 odd:bg-accent/50 rounded",
-        selectedMusicIDs.length > 0 && "first:mt-12 lg:first:mt-0",
-        playableMusic?.id === music.id && "text-primary_color"
+        isPlaying && "text-primary_color"
       )}
     >
       <Input
         type="checkbox"
         checked={isChecked}
-        onChange={() => select(music.id)}
+        onChange={() => select(music.id, pathname)}
         className={cn(
           "w-5 h-5 opacity-0 group-hover:opacity-100 accent-primary_color mr-2",
           isChecked && "opacity-100"
@@ -44,13 +57,13 @@ const MusicRow = ({ music }: { music: Music }) => {
         </h1>
         {!isChecked && (
           <div className="hidden h-full group-hover:flex">
-            {playableMusic?.id !== music.id && (
+            {!isPlaying && (
               <Hint label="Play">
                 <Button
                   asChild
                   variant="ghost"
                   className="flex items-center justify-center h-full w-12 rounded-none"
-                  onClick={() => play(music.id)}
+                  onClick={clickHandler}
                 >
                   <Play className="text-zinc-100" />
                 </Button>

@@ -1,39 +1,141 @@
 import { create } from "zustand";
 
-type State = {
-  selectedMusicIDs: string[];
-  cancel: () => void;
-  select: (selectedMusicID: string) => void;
-  selectAll: (groupIDs: string[]) => void;
-  deleteMusic: () => void;
-  addToPlaylist: () => void;
+type Colection = {
+  pathname: string;
+  _IDs: string[];
 };
 
-export const useSelect = create<State>((set) => ({
-  selectedMusicIDs: [],
+type State = {
+  colectionIDsByPathname: Colection[];
+  getColection: (pathname: string) => { colectionIDs: string[] };
+  cancel: (pathname: string) => void;
+  select: (selectedID: string, pathname: string) => void;
+  selectAll: (selectedIDs: string[], pathname: string) => void;
+};
 
-  cancel: () => {
-    set(() => ({
-      selectedMusicIDs: [],
-    }));
+export const useSelect = create<State>((set, get) => ({
+  colectionIDsByPathname: [],
+
+  getColection: (pathname: string) => {
+    const state = get();
+
+    return {
+      colectionIDs:
+        state.colectionIDsByPathname.find(
+          (colection) => colection.pathname === pathname
+        )?._IDs || [],
+    };
   },
 
-  select: (selectedMusicID: string) => {
-    set((state) => ({
-      selectedMusicIDs:
-        state.selectedMusicIDs.filter((id) => id == selectedMusicID).length > 0 // means already there
-          ? state.selectedMusicIDs.filter((id) => id !== selectedMusicID)
-          : [...state.selectedMusicIDs, selectedMusicID],
-    }));
+  cancel: (pathname: string) => {
+    set((state) => {
+      if (!pathname) return { ...state };
+
+      const isExistPath =
+        state.colectionIDsByPathname.findIndex(
+          (colection) => colection.pathname === pathname
+        ) > -1;
+
+      if (!isExistPath) return { ...state };
+
+      return {
+        ...state,
+        colectionIDsByPathname: state.colectionIDsByPathname.map(
+          (colection) => {
+            if (colection.pathname === pathname) {
+              return {
+                pathname: colection.pathname,
+                _IDs: [],
+              };
+            }
+
+            return colection;
+          }
+        ),
+      };
+    });
   },
 
-  selectAll: (groupIDs: string[]) => {
-    set((_state) => ({
-      selectedMusicIDs: groupIDs,
-    }));
+  select: (selectedID: string, pathname: string) => {
+    set((state) => {
+      if (!pathname) return { ...state };
+
+      const isExistPath =
+        state.colectionIDsByPathname.findIndex(
+          (colection) => colection.pathname === pathname
+        ) > -1;
+
+      if (isExistPath) {
+        return {
+          ...state,
+          colectionIDsByPathname: state.colectionIDsByPathname.map(
+            (colection) => {
+              if (colection.pathname === pathname) {
+                const isExistID =
+                  colection._IDs.findIndex((id) => id === selectedID) > -1;
+
+                return {
+                  pathname: colection.pathname,
+                  _IDs: isExistID
+                    ? colection._IDs.filter((id) => id !== selectedID) // means unselect
+                    : [selectedID, ...colection._IDs], // means select
+                };
+              }
+
+              return colection;
+            }
+          ),
+        };
+      }
+
+      const newColection = {
+        pathname,
+        _IDs: [selectedID],
+      };
+
+      return {
+        ...state,
+        colectionIDsByPathname: [...state.colectionIDsByPathname, newColection],
+      };
+    });
   },
 
-  deleteMusic: () => {},
+  selectAll: (selectedIDs: string[], pathname: string) => {
+    set((state) => {
+      if (!pathname) return { ...state };
 
-  addToPlaylist: () => {},
+      const isExistPath =
+        state.colectionIDsByPathname.findIndex(
+          (colection) => colection.pathname === pathname
+        ) > -1;
+
+      if (isExistPath) {
+        return {
+          ...state,
+          colectionIDsByPathname: state.colectionIDsByPathname.map(
+            (colection) => {
+              if (colection.pathname === pathname) {
+                return {
+                  pathname: colection.pathname,
+                  _IDs: [...selectedIDs],
+                };
+              }
+
+              return colection;
+            }
+          ),
+        };
+      }
+
+      const newColection = {
+        pathname,
+        _IDs: [...selectedIDs],
+      };
+
+      return {
+        ...state,
+        colectionIDsByPathname: [...state.colectionIDsByPathname, newColection],
+      };
+    });
+  },
 }));

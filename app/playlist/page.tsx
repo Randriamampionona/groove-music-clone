@@ -11,7 +11,7 @@ const PlaylistsPage = async ({}: TProps) => {
     <>
       <PageHeader tile="Playlist" />
 
-      <div className="justify-center flex flex-wrap sm:justify-start gap-y-6 w-full p-2 lg:p-8">
+      <div className="flex flex-wrap justify-start gap-y-6 w-full h-auto p-2 lg:p-8">
         {data.map((item) => (
           <Card key={item.id} data={item} type="PLAYLIST" /> //10rem each
         ))}

@@ -1,19 +1,21 @@
 "use client";
 
-import { useTrackList } from "@/store/useTrackList";
 import AudioTag from "./AudioTag";
-import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 type TProps = {
   musics: Music[];
 };
 
 const MediaPlayer = ({ musics }: TProps) => {
-  const { playableMusic, setTracks, autoPlay } = useTrackList((state) => state);
+  const searchParams = useSearchParams();
 
-  const onEnded = () => autoPlay();
+  const index = searchParams.get("index") || 0;
 
-  useEffect(() => setTracks(musics), [musics, setTracks]);
+  const playableMusic = !!musics ? musics[Number(index)] : null;
+
+  const nextUrlIndex = Number(index) + 1;
+  const prevUrlIndex = Number(index) - 1;
 
   return playableMusic ? (
     <section className="sticky bottom-0 flex items-center justify-between gap-2 flex-wrap w-fillAvailable bg-black shadow-audioShadow p-2 lg:p-4">
@@ -30,7 +32,13 @@ const MediaPlayer = ({ musics }: TProps) => {
       <div className="flex-1">
         <AudioTag
           music={playableMusic}
-          onEnded={onEnded}
+          queries={{
+            next: [{ index: nextUrlIndex }],
+            prev: [{ index: prevUrlIndex }],
+          }}
+          nextUrlIndex={nextUrlIndex}
+          prevUrlIndex={prevUrlIndex}
+          trackLength={musics.length}
           className="!bg-transparent"
         />
       </div>

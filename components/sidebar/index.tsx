@@ -2,8 +2,8 @@ import Link from "next/link";
 
 import {
   Music4,
-  AudioWaveformIcon,
-  ListMusic,
+  Blocks,
+  History,
   ListChecks,
   AppWindowIcon,
 } from "lucide-react";
@@ -26,18 +26,18 @@ const navLinks = [
   {
     text: "Genres",
     slug: "/genres",
-    Icon: <AudioWaveformIcon />,
+    Icon: <Blocks />,
     action: false,
   },
   {
     text: "Recent plays",
     slug: "/recent-plays",
-    Icon: <ListMusic />,
+    Icon: <History />,
     action: false,
   },
   {
     text: "Playlists",
-    slug: "/playlists",
+    slug: "/playlist",
     Icon: <ListChecks />,
     action: true,
   },

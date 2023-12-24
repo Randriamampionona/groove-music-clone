@@ -5,22 +5,33 @@ import MobileMusicRow from "@/components/MobileMusicRow";
 import MusicRow from "@/components/MusicRow";
 import PageHeader from "@/components/PageHeader";
 
-const MyMusicPage = async () => {
+type TProps = {
+  searchParams: {
+    tracks?: string;
+    index?: string;
+  };
+};
+
+const MyMusicPage = async ({}: TProps) => {
   const musicList = await getMusicList();
+
+  if (!musicList.length) {
+    return <p>Empty list</p>;
+  }
 
   return (
     <>
-      <GroupAction musicList={musicList} />
+      <GroupAction onSelectAllData={musicList} canMultiSelect canDelete />
 
       <PageHeader tile="My music" />
 
-      <div className="relative">
-        <div className="p-2 lg:p-4">
-          {musicList.map((music) => (
-            <MusicRow key={music.id} music={music} />
+      <div className="flex flex-col relative h-full">
+        <div className="flex-1 p-2 lg:p-4">
+          {musicList.map((music, index) => (
+            <MusicRow key={music.id} music={{ index, ...music }} />
           ))}
-          {musicList.map((music) => (
-            <MobileMusicRow key={music.id} music={music} />
+          {musicList.map((music, index) => (
+            <MobileMusicRow key={music.id} music={{ index, ...music }} />
           ))}
         </div>
 
