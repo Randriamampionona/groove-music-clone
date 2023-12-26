@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="relative w-full h-dscreen">
+      <body className="relative">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

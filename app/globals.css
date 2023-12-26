@@ -5,8 +5,7 @@
 html,
 body,
 :root {
-  height: 100dvh;
-  @apply dark:bg-neutral-900/80;
+  @apply h-dscreen w-full dark:bg-neutral-900/80;
 }
 
 .hidden-scrollbar {

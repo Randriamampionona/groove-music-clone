@@ -1,12 +1,6 @@
 import Link from "next/link";
 
-import {
-  Music4,
-  Blocks,
-  History,
-  ListChecks,
-  AppWindowIcon,
-} from "lucide-react";
+import { Music4, History, ListChecks, AppWindowIcon } from "lucide-react";
 import Search from "./Search";
 import NavLinks from "./NavLinks";
 
@@ -21,12 +15,6 @@ const navLinks = [
     text: "My music",
     slug: "/my-music",
     Icon: <Music4 />,
-    action: false,
-  },
-  {
-    text: "Genres",
-    slug: "/genres",
-    Icon: <Blocks />,
     action: false,
   },
   {

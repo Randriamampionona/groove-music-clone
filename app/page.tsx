@@ -6,7 +6,7 @@ import { ArrowRight, Stars } from "lucide-react";
 export default function Home() {
   return (
     <main className="relative flex flex-col items-center h-dscreen p-4 lg:p-4">
-      <div className="text-center max-w-2xl mt-20 lg:mt-28">
+      <div className="text-center max-w-2xl pt-20 lg:pt-28">
         <h2 className="flex items-center justify-center space-x-2 text-muted-foreground text-sm">
           <span>Unleash your musical potential with Groove 2.0</span>{" "}
           <Stars className="text-yellow-500" />
@@ -24,7 +24,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-8 mt-12">
-        <Link href="/my-music">
+        <Link href="/browse">
           <Button className="space-x-2 font-bold">
             <span>Discover our latest tracks</span>
             <ArrowRight size={16} />

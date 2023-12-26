@@ -47,7 +47,7 @@ export default function AudioTag({
   const onEndedHandler = () => {
     if (hasNext) {
       const URL =
-        pathname + newQueryParams(toString(), { index: +musicIndex - 1 });
+        pathname + newQueryParams(toString(), { index: +musicIndex + 1 });
 
       router.push(URL);
     }

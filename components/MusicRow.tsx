@@ -9,6 +9,7 @@ import Hint from "./Hint";
 import { Input } from "./ui/input";
 import AddPlaylistDialog from "./AddPlaylistDialog";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { newQueryParams } from "@/lib/newQueryParams";
 
 type TMusicRow = {
   music: Music & { index?: number };
@@ -17,7 +18,7 @@ type TMusicRow = {
 const MusicRow = ({ music }: TMusicRow) => {
   const { getColection, select } = useSelect((state) => state);
   const [isChecked, setIsChecked] = useState(false);
-  const { get } = useSearchParams();
+  const { get, toString } = useSearchParams();
   const { push } = useRouter();
   const pathname = usePathname();
 
@@ -26,7 +27,11 @@ const MusicRow = ({ music }: TMusicRow) => {
   const isPlaying = Number(get("index")) === music.index;
 
   const clickHandler = () => {
-    push(`${pathname}?index=${music.index}`);
+    const URL = pathname + newQueryParams(toString(), { index: music.index });
+
+    console.log(URL);
+
+    push(URL);
   };
 
   useEffect(() => {
