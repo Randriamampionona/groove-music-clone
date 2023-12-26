@@ -45,11 +45,12 @@ export default function GroupAction({
     const dataString = colectionIDs.join(
       process.env.NEXT_PUBLIC_QUERY_STRING_SEPARATOR! as string
     );
-    const URL =
-      colectionIDs.length === 1
-        ? `/play/music/${colectionIDs[0]}`
-        : `/play/music/?tracks=${dataString}&index=0`;
-    router.push(URL);
+
+    router.push(`/play/music/?tracks=${dataString}&index=0`);
+  };
+
+  const playOne = () => {
+    router.push(`/play/music/${colectionIDs[0]}`);
   };
 
   const onselectAll = () => {
@@ -71,7 +72,7 @@ export default function GroupAction({
       id: "play",
       text: "Play",
       Icon: Play,
-      action: playSelectedMusic,
+      action: colectionIDs.length === 1 ? playOne : playSelectedMusic,
     },
     {
       id: "add",

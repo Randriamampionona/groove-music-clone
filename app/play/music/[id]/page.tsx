@@ -34,7 +34,12 @@ const ID = async ({ params }: TProps) => {
           </div>
         </div>
 
-        <AudioTag music={music} className="!bg-transparent" />
+        <AudioTag
+          music={music}
+          musicIndex="0"
+          trackLength={1}
+          className="!bg-transparent"
+        />
 
         <Dvd />
         <Blog />

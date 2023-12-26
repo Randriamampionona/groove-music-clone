@@ -25,9 +25,6 @@ const PlayPage = async ({ searchParams: { tracks, index = "0" } }: TProps) => {
 
   const playableMusic = !!musics ? musics[Number(index)] : null;
 
-  const nextUrlIndex = Number(index) + 1;
-  const prevUrlIndex = Number(index) - 1;
-
   return !!playableMusic ? (
     <section className="relative w-full h-dscreen ">
       <main className="relative flex flex-col h-full ">
@@ -51,13 +48,8 @@ const PlayPage = async ({ searchParams: { tracks, index = "0" } }: TProps) => {
 
         <AudioTag
           music={playableMusic}
-          queries={{
-            next: [{ tracks }, { index: nextUrlIndex }],
-            prev: [{ tracks }, { index: prevUrlIndex }],
-          }}
-          trackLength={IDs.length}
-          nextUrlIndex={nextUrlIndex}
-          prevUrlIndex={prevUrlIndex}
+          musicIndex={index}
+          trackLength={musics?.length || 0}
           className="!bg-transparent"
         />
 

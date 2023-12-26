@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
 import {
   Play,
   Pause,
@@ -20,66 +19,53 @@ import "react-h5-audio-player/lib/styles.css";
 
 import Hint from "./Hint";
 import { cn } from "@/lib/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { newQueryParams } from "@/lib/newQueryParams";
 
 type TProps = {
   music: Music;
-  queries?: {
-    next: Object[]; // e,g: [{foo: "45"}, {bar: "ok"}]
-    prev: Object[]; // e,g: [{foo: "45"}, {bar: "ok"}]
-  };
-  nextUrlIndex?: string | number;
-  prevUrlIndex?: string | number;
-  trackLength?: number;
+  musicIndex: string;
+  trackLength: number;
   className?: string;
 };
 
 export default function AudioTag({
   music,
-  queries,
-  trackLength = 1,
-  nextUrlIndex,
-  prevUrlIndex,
+  musicIndex,
+  trackLength,
   className = "",
 }: TProps) {
-  const router = useRouter();
-  const pathname = usePathname();
   const [volume] = useState(0.1);
   const audioRef = useRef<H5AudioPlayer | null>(null);
+  const router = useRouter();
+  const pathname = usePathname();
+  const { toString } = useSearchParams();
 
-  const hasNext = Number(nextUrlIndex) <= trackLength - 1;
-  const hasPrev = Number(prevUrlIndex) >= 0;
-
-  // e,g: [{foo: "45"}, {bar: "ok"}] => 'foo=45&bar=ok'
-  const q = {
-    next: !!queries
-      ? `?${queries.next
-          .map((n) => `${Object.keys(n)}=${Object.values(n)}`)
-          .join("&")}`
-      : "",
-    prev: !!queries
-      ? `?${queries.prev
-          .map((n) => `${Object.keys(n)}=${Object.values(n)}`)
-          .join("&")}`
-      : "",
-  };
-  const URL = {
-    next: `${pathname}${q.next}`,
-    prev: `${pathname}${q.prev}`,
-  };
+  const hasNext = +musicIndex + 1 < trackLength;
+  const hasPrev = +musicIndex - 1 >= 0;
 
   const onEndedHandler = () => {
     if (hasNext) {
-      router.push(URL.next);
+      const URL =
+        pathname + newQueryParams(toString(), { index: +musicIndex - 1 });
+
+      router.push(URL);
     }
   };
 
   const nextAndPrecHandler = (key: "next" | "prev") => {
     if (key === "next" && hasNext) {
-      router.push(URL.next);
+      const URL =
+        pathname + newQueryParams(toString(), { index: +musicIndex + 1 });
+
+      router.push(URL);
     }
 
     if (key === "prev" && hasPrev) {
-      router.push(URL.prev);
+      const URL =
+        pathname + newQueryParams(toString(), { index: +musicIndex - 1 });
+
+      router.push(URL);
     }
   };
 

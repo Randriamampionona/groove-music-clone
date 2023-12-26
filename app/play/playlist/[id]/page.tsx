@@ -30,9 +30,6 @@ const PlayPage = async ({
 
   const playableMusic = !!musics ? musics[Number(index)] : null;
 
-  const nextUrlIndex = Number(index) + 1;
-  const prevUrlIndex = Number(index) - 1;
-
   return !!playableMusic ? (
     <section className="relative w-full h-dscreen ">
       <main className="relative flex flex-col h-full ">
@@ -59,13 +56,8 @@ const PlayPage = async ({
 
         <AudioTag
           music={playableMusic}
-          queries={{
-            next: [{ index: nextUrlIndex }],
-            prev: [{ index: prevUrlIndex }],
-          }}
+          musicIndex={index}
           trackLength={musics?.length || 0}
-          nextUrlIndex={nextUrlIndex}
-          prevUrlIndex={prevUrlIndex}
           className="!bg-transparent"
         />
 

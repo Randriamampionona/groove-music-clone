@@ -1,19 +1,20 @@
 import getMusicList from "@/action/getMusicList";
-import GroupAction from "@/components/GroupAction";
-import MediaPlayer from "@/components/MediaPlayer";
-import MobileMusicRow from "@/components/MobileMusicRow";
-import MusicRow from "@/components/MusicRow";
 import PageHeader from "@/components/PageHeader";
+import GroupAction from "@/components/GroupAction";
+import Sorting from "@/components/Sorting";
+import MusicRow from "@/components/MusicRow";
+import MobileMusicRow from "@/components/MobileMusicRow";
+import MediaPlayer from "@/components/MediaPlayer";
 
 type TProps = {
   searchParams: {
-    tracks?: string;
     index?: string;
+    sort_by?: "title" | "genre" | "artist";
   };
 };
 
-const MyMusicPage = async ({}: TProps) => {
-  const musicList = await getMusicList();
+const MyMusicPage = async ({ searchParams }: TProps) => {
+  const musicList = await getMusicList(searchParams.sort_by);
 
   if (!musicList.length) {
     return <p>Empty list</p>;
@@ -21,11 +22,13 @@ const MyMusicPage = async ({}: TProps) => {
 
   return (
     <>
-      <GroupAction onSelectAllData={musicList} canMultiSelect canDelete />
-
       <PageHeader tile="My music" />
 
+      <GroupAction onSelectAllData={musicList} canMultiSelect canDelete />
+
       <div className="flex flex-col relative h-full">
+        <Sorting />
+
         <div className="flex-1 p-2 lg:p-4">
           {musicList.map((music, index) => (
             <MusicRow key={music.id} music={{ index, ...music }} />
@@ -35,7 +38,10 @@ const MyMusicPage = async ({}: TProps) => {
           ))}
         </div>
 
-        <MediaPlayer musics={musicList} />
+        <MediaPlayer
+          musicIndex={searchParams.index || "0"}
+          musics={musicList}
+        />
       </div>
     </>
   );

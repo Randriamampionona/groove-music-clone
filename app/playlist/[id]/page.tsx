@@ -12,9 +12,12 @@ type TProps = {
   params: {
     id?: string;
   };
+  searchParams: {
+    index?: string;
+  };
 };
 
-const PlaylistIDPage = async ({ params }: TProps) => {
+const PlaylistIDPage = async ({ params, searchParams }: TProps) => {
   const playlist = await getPlaylistId(params.id!);
 
   if (!playlist) return notFound();
@@ -53,7 +56,12 @@ const PlaylistIDPage = async ({ params }: TProps) => {
           </section>
         )}
 
-        {musicList?.length && <MediaPlayer musics={musicList} />}
+        {musicList?.length && (
+          <MediaPlayer
+            musicIndex={searchParams.index || "0"}
+            musics={musicList}
+          />
+        )}
       </div>
     </>
   );
