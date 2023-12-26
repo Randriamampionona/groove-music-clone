@@ -159,7 +159,10 @@ export default function GroupAction({
 
         <div className="block lg:hidden">
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center justify-center">
+            <DropdownMenuTrigger
+              asChild
+              className="flex items-center justify-center"
+            >
               <Button variant="ghost">
                 <MoreHorizontal />
               </Button>

@@ -29,7 +29,7 @@ const PlaylistHeader = ({ playlist }: TProps) => {
         </div>
 
         <div className="flex-grow flex-shrink space-y-4">
-          <h1 className="text-2xl font-bold leading-none line-clamp-2">
+          <h1 className="text-2xl font-bold leading-none line-clamp-1 lg:line-clamp-2">
             {playlist.title}
           </h1>
           <p className="text-sm text-muted-foreground">

@@ -21,14 +21,14 @@ const CardAction = ({ data, type }: TCardAction) => {
   const colectionIDs = getColection(pathname).colectionIDs;
 
   return (
-    <div
-      className={cn(
-        "absolute inset-0 flex flex-col opacity-0 w-full h-full group-hover:opacity-100 transition-all",
-        colectionIDs.findIndex((id) => id == data.id) != -1 && "opacity-100"
-      )}
-    >
+    <div className={cn("absolute inset-0 flex flex-col w-full h-full")}>
       {type === "MUSIC" && (
-        <div className="flex items-center justify-start p-2">
+        <div
+          className={cn(
+            "flex items-center justify-start p-2 opacity-0 group-hover:opacity-100",
+            colectionIDs.length > 0 && "opacity-100"
+          )}
+        >
           <Input
             type="checkbox"
             className="!w-5 !h-5 !accent-primary_color"
@@ -38,18 +38,23 @@ const CardAction = ({ data, type }: TCardAction) => {
         </div>
       )}
 
-      <div className="flex items-center justify-between w-full p-2 mt-auto opacity-0 group-hover:opacity-100">
+      <div
+        className={
+          "flex items-center justify-between w-full p-2 mt-auto opacity-100 lg:opacity-0 group-hover:opacity-100"
+        }
+      >
         <Link
+          prefetch={false}
           href={
             type === "MUSIC" ? `/play/music/${data.id}` : `/playlist/${data.id}`
           }
         >
-          <Button size="icon" className="rounded-full w-8 h-8">
-            <Play className="pl-1" />
+          <Button variant="secondary" size="icon" className="w-8 h-8">
+            <Play size={20} className="pl-1" />
           </Button>
         </Link>
-        <Button size="icon" className="rounded-full w-8 h-8">
-          <MoreHorizontal />
+        <Button variant="secondary" size="icon" className="w-8 h-8">
+          <MoreHorizontal size={20} />
         </Button>
       </div>
     </div>

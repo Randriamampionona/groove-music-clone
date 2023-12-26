@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 
-import { Edit2, Play, Trash2 } from "lucide-react";
+import { Edit2, MoreHorizontal, Play, Trash2 } from "lucide-react";
 
 type TProps = {
   playlistId: string;
@@ -24,12 +24,12 @@ const PlaylistHeaderActions = ({ playlistId }: TProps) => {
         onClick={playAll}
       >
         <Play size={18} />
-        <span>Play</span>
+        <span>Play all</span>
       </Button>
 
       <Button
         variant="ghost"
-        className="flex items-center justify-center cursor-pointer list-none bg-accent space-x-2"
+        className="hidden sm:flex items-center justify-center cursor-pointer list-none bg-accent space-x-2"
       >
         <Edit2 size={18} />
         <span className="hidden md:block">Rename</span>
@@ -37,10 +37,17 @@ const PlaylistHeaderActions = ({ playlistId }: TProps) => {
 
       <Button
         variant="ghost"
-        className="flex items-center justify-center cursor-pointer list-none bg-accent space-x-2 hover:text-destructive"
+        className="hidden sm:flex items-center justify-center cursor-pointer list-none bg-accent space-x-2 hover:text-destructive"
       >
         <Trash2 size={18} />
         <span className="hidden md:block">Delete</span>
+      </Button>
+
+      <Button
+        variant="ghost"
+        className="flex sm:hidden items-center justify-center cursor-pointer list-none bg-accent space-x-2"
+      >
+        <MoreHorizontal size={18} />
       </Button>
     </div>
   );

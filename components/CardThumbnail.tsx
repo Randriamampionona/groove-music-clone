@@ -31,7 +31,7 @@ const CardThumbnail = ({ thumbnail, type }: Tthumbnail) => {
         alt="card-thumbnail"
         width={152}
         height={152}
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover !bg-black/90"
       />
     );
   } else {

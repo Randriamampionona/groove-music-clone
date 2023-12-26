@@ -1,8 +1,6 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Toaster } from "@/components/ui/toaster";
+import "@/app/globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
-import Sidebar from "@/components/sidebar";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Groove Music Clone",
@@ -16,18 +14,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="relative flex w-full h-dscreen">
+      <body className="relative w-full h-dscreen">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           forcedTheme="dark"
           disableTransitionOnChange
         >
-          <Sidebar /> {/*width: 4rem na 16rem na 18rem */}
-          <main className="relative ml-16 lg:ml-64 xl:ml-72 w-full h-full">
-            {children}
-            <Toaster />
-          </main>
+          {children}
         </ThemeProvider>
       </body>
     </html>
