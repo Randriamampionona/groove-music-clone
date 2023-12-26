@@ -15,11 +15,11 @@ export default function Home() {
           The Umtimate destination for Music Creators and Lovers
         </h1>
         <p className="mt-4">
-          Goove 2.0 is a revolutionary music streaming platform that caters to
-          your every musical need. Whether you're in the mood for some
-          old-school classics or the latest chart-toppers, Goove 2.0 has got you
-          covered. So sit back, relax, and let Goove 2.0 take you on a musical
-          journey like never before!
+          Groove 2.0 is a revolutionary music streaming platform that caters to
+          your every musical need. Whether you&apos;re in the mood for some
+          old-school classics or the latest chart-toppers, Groove 2.0 has got
+          you covered. So sit back, relax, and let Goove 2.0 take you on a
+          musical journey like never before!
         </p>
       </div>
 
